@@ -1,62 +1,587 @@
-# 隐私政策
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>智趣 - 隐私政策</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-最后更新日期：2025年2月26日
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecf2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
 
-## 引言
-智趣（以下简称"我们"）非常重视您的隐私。本隐私政策说明我们如何收集、使用和保护您的信息。
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            box-shadow: 0 20px 40px rgba(108, 92, 231, 0.15), 0 6px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
 
-## 信息收集
-智趣应用不会收集任何个人身份信息。所有数据（包括您收藏的名言、笔记等）仅存储在您的设备本地，不会上传至任何服务器。
+        .header {
+            background: linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%);
+            padding: 32px 24px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
 
-## 数据存储
-• 所有名言、笔记数据仅保存在您的设备本地
-• 应用设置（主题、语言偏好）保存在设备的 UserDefaults 中
-• 我们不会访问、存储或分享您的任何个人数据
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+        }
 
-## 应用内购买
-我们提供应用内打赏功能，该功能通过 Apple 的 StoreKit 实现。所有支付交易由 Apple 处理，我们无法获取您的支付信息。
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
 
-## 第三方服务
-本应用不使用任何第三方分析工具或广告服务。
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
 
-## 儿童隐私
-本应用不会故意收集13岁以下儿童的个人信息。
+        .app-icon span {
+            font-size: 32px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
 
-## 隐私政策变更
-我们可能会不时更新本隐私政策。变更后会在此页面发布更新。
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-## 联系我们
-如果您对本隐私政策有任何疑问，请联系：
-ccullen@qq.com
----
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
 
-# Privacy Policy
+        .language-switcher {
+            display: flex;
+            gap: 12px;
+            padding: 20px 24px;
+            background: rgba(108, 92, 231, 0.05);
+            border-bottom: 1px solid rgba(108, 92, 231, 0.1);
+            justify-content: flex-end;
+        }
 
-Last updated: February 26, 2025
+        .lang-btn {
+            background: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            color: #6C5CE7;
+            border: 1px solid rgba(108, 92, 231, 0.2);
+        }
 
-## Introduction
-ZhiQu ("we", "us", or "our") respects your privacy. This Privacy Policy explains how we collect, use, and protect your information.
+        .lang-btn.active {
+            background: #6C5CE7;
+            color: white;
+            border-color: #6C5CE7;
+            box-shadow: 0 8px 15px rgba(108, 92, 231, 0.3);
+        }
 
-## Information Collection
-ZhiQu does not collect any personally identifiable information. All data (including quotes and notes you save) is stored locally on your device and is never uploaded to any server.
+        .lang-btn:active {
+            transform: scale(0.95);
+        }
 
-## Data Storage
-• All quotes and notes are stored only on your local device
-• App settings (theme, language preferences) are stored in UserDefaults
-• We do not access, store, or share any of your personal data
+        .content {
+            padding: 24px;
+        }
 
-## In-App Purchases
-We offer in-app tips through Apple's StoreKit. All payment transactions are handled by Apple, and we cannot access your payment information.
+        .section {
+            margin-bottom: 28px;
+            animation: fadeIn 0.5s ease;
+        }
 
-## Third-Party Services
-This app does not use any third-party analytics tools or advertising services.
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-## Children's Privacy
-This app does not knowingly collect personal information from children under 13.
+        h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #6C5CE7;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid rgba(108, 92, 231, 0.1);
+            padding-bottom: 8px;
+        }
 
-## Changes to This Privacy Policy
-We may update this Privacy Policy from time to time. Changes will be posted on this page.
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: #6C5CE7;
+            border-radius: 4px;
+            display: inline-block;
+        }
 
-## Contact Us
-If you have any questions about this Privacy Policy, please contact:
-ccullen@qq.com
+        h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 16px 0 8px;
+        }
+
+        p {
+            margin-bottom: 12px;
+            color: #4a5568;
+        }
+
+        ul {
+            margin: 12px 0 12px 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #4a5568;
+            list-style-type: none;
+            position: relative;
+            padding-left: 24px;
+        }
+
+        li::before {
+            content: '•';
+            color: #6C5CE7;
+            font-weight: bold;
+            position: absolute;
+            left: 8px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .feature-item {
+            background: rgba(108, 92, 231, 0.05);
+            padding: 12px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(108, 92, 231, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .feature-item span {
+            font-size: 14px;
+            font-weight: 500;
+            color: #6C5CE7;
+        }
+
+        .badge {
+            background: rgba(108, 92, 231, 0.1);
+            color: #6C5CE7;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-block;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .updated {
+            font-style: italic;
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 24px;
+            text-align: right;
+        }
+
+        .footer {
+            background: #f8fafc;
+            padding: 24px;
+            text-align: center;
+            border-top: 1px solid rgba(108, 92, 231, 0.1);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            color: #4a5568;
+        }
+
+        .contact-info a {
+            color: #6C5CE7;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .language-content {
+            display: none;
+        }
+
+        .language-content.active {
+            display: block;
+        }
+
+        .app-description {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 24px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-description::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            right: 10px;
+            font-size: 120px;
+            opacity: 0.1;
+            color: white;
+            font-family: serif;
+        }
+
+        .app-description p {
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #6C5CE7, transparent);
+            margin: 24px 0;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 24px;
+            }
+            
+            .header {
+                padding: 24px 20px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="app-icon">
+                    <span>💭</span>
+                </div>
+                <h1 id="app-name">智趣</h1>
+                <div class="subtitle" id="app-subtitle">记录触动心灵的每一句话</div>
+            </div>
+        </div>
+
+        <!-- Language Switcher -->
+        <div class="language-switcher">
+            <button class="lang-btn active" onclick="switchLanguage('zh')">🇨🇳 中文</button>
+            <button class="lang-btn" onclick="switchLanguage('en')">🇺🇸 English</button>
+        </div>
+
+        <!-- Content - Chinese -->
+        <div id="content-zh" class="content language-content active">
+            <div class="updated">最后更新日期：2025年2月26日</div>
+
+            <!-- App Description Section -->
+            <div class="app-description">
+                <h2 style="color: white; border-bottom-color: rgba(255,255,255,0.2);">📱 关于智趣</h2>
+                <p>智趣是一款优雅的名言收藏与笔记应用，帮助您记录生活中的智慧时刻。</p>
+                
+                <h3 style="color: white;">主要功能</h3>
+                <div class="feature-grid">
+                    <div class="feature-item" style="background: rgba(255,255,255,0.1);">
+                        <span class="feature-icon">🎲</span>
+                        <span>每日推荐</span>
+                    </div>
+                    <div class="feature-item" style="background: rgba(255,255,255,0.1);">
+                        <span class="feature-icon">📂</span>
+                        <span>智能分类</span>
+                    </div>
+                    <div class="feature-item" style="background: rgba(255,255,255,0.1);">
+                        <span class="feature-icon">📝</span>
+                        <span>深度笔记</span>
+                    </div>
+                    <div class="feature-item" style="background: rgba(255,255,255,0.1);">
+                        <span class="feature-icon">🌍</span>
+                        <span>多语言支持</span>
+                    </div>
+                    <div class="feature-item" style="background: rgba(255,255,255,0.1);">
+                        <span class="feature-icon">🃏</span>
+                        <span>精美卡片分享</span>
+                    </div>
+                    <div class="feature-item" style="background: rgba(255,255,255,0.1);">
+                        <span class="feature-icon">📊</span>
+                        <span>数据统计</span>
+                    </div>
+                </div>
+
+                <p style="margin-top: 16px;">智趣的设计简约而不简单，专注于为您提供最纯粹的名言收藏体验。无论是哲人的智慧、文学的美感，还是日常的感悟，都能在智趣中找到安放之处。</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2>🔒 引言</h2>
+                <p>智趣（以下简称"我们"）非常重视您的隐私。本隐私政策说明我们如何收集、使用和保护您的信息。</p>
+            </div>
+
+            <div class="section">
+                <h2>📊 信息收集</h2>
+                <p>智趣应用不会收集任何个人身份信息。所有数据（包括您收藏的名言、笔记等）仅存储在您的设备本地，不会上传至任何服务器。</p>
+            </div>
+
+            <div class="section">
+                <h2>💾 数据存储</h2>
+                <ul>
+                    <li>所有名言、笔记数据仅保存在您的设备本地</li>
+                    <li>应用设置（主题、语言偏好）保存在设备的 UserDefaults 中</li>
+                    <li>我们不会访问、存储或分享您的任何个人数据</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>💰 应用内购买</h2>
+                <p>我们提供应用内打赏功能，该功能通过 Apple 的 StoreKit 实现。所有支付交易由 Apple 处理，我们无法获取您的支付信息。</p>
+                
+                <div style="background: rgba(108, 92, 231, 0.05); padding: 16px; border-radius: 16px; margin-top: 12px;">
+                    <h3>打赏选项</h3>
+                    <div>
+                        <span class="badge">☕️ 一杯咖啡</span>
+                        <span class="badge">🧋 一杯奶茶</span>
+                        <span class="badge">🍜 一碗螺蛳粉</span>
+                        <span class="badge">🥙 一个肉夹馍</span>
+                        <span class="badge">🍔 一个汉堡</span>
+                    </div>
+                    <p style="font-size: 14px; margin-top: 12px; color: #718096;">打赏是纯粹的支持行为，不会解锁任何额外功能。</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🔗 第三方服务</h2>
+                <p>本应用不使用任何第三方分析工具或广告服务。</p>
+            </div>
+
+            <div class="section">
+                <h2>👶 儿童隐私</h2>
+                <p>本应用不会故意收集13岁以下儿童的个人信息。</p>
+            </div>
+
+            <div class="section">
+                <h2>📝 隐私政策变更</h2>
+                <p>我们可能会不时更新本隐私政策。变更后会在此页面发布更新。</p>
+            </div>
+        </div>
+
+        <!-- Content - English -->
+        <div id="content-en" class="content language-content">
+            <div class="updated">Last updated: February 26, 2025</div>
+
+            <!-- App Description Section - English -->
+            <div class="app-description">
+                <h2 style="color: white; border-bottom-color: rgba(255,255,255,0.2);">📱 About ZhiQu</h2>
+                <p>ZhiQu is an elegant quote collection and note-taking app that helps you capture moments of wisdom in your life.</p>
+                
+                <h3 style="color: white;">Key Features</h3>
+                <div class="feature-grid">
+                    <div class="feature-item" style="background: rgba(255,255,255,0.1);">
+                        <span class="feature-icon">🎲</span>
+                        <span>Daily Discovery</span>
+                    </div>
+                    <div class="feature-item" style="background: rgba(255,255,255,0.1);">
+                        <span class="feature-icon">📂</span>
+                        <span>Smart Categories</span>
+                    </div>
+                    <div class="feature-item" style="background: rgba(255,255,255,0.1);">
+                        <span class="feature-icon">📝</span>
+                        <span>Deep Notes</span>
+                    </div>
+                    <div class="feature-item" style="background: rgba(255,255,255,0.1);">
+                        <span class="feature-icon">🌍</span>
+                        <span>Multi-language</span>
+                    </div>
+                    <div class="feature-item" style="background: rgba(255,255,255,0.1);">
+                        <span class="feature-icon">🃏</span>
+                        <span>Share Cards</span>
+                    </div>
+                    <div class="feature-item" style="background: rgba(255,255,255,0.1);">
+                        <span class="feature-icon">📊</span>
+                        <span>Statistics</span>
+                    </div>
+                </div>
+
+                <p style="margin-top: 16px;">ZhiQu's design is minimal yet sophisticated, focusing on providing you with the purest quote collection experience. Whether it's the wisdom of philosophers, the beauty of literature, or daily inspirations, you'll find a home for them in ZhiQu.</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2>🔒 Introduction</h2>
+                <p>ZhiQu ("we", "us", or "our") respects your privacy. This Privacy Policy explains how we collect, use, and protect your information.</p>
+            </div>
+
+            <div class="section">
+                <h2>📊 Information Collection</h2>
+                <p>ZhiQu does not collect any personally identifiable information. All data (including quotes and notes you save) is stored locally on your device and is never uploaded to any server.</p>
+            </div>
+
+            <div class="section">
+                <h2>💾 Data Storage</h2>
+                <ul>
+                    <li>All quotes and notes are stored only on your local device</li>
+                    <li>App settings (theme, language preferences) are stored in UserDefaults</li>
+                    <li>We do not access, store, or share any of your personal data</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>💰 In-App Purchases</h2>
+                <p>We offer in-app tips through Apple's StoreKit. All payment transactions are handled by Apple, and we cannot access your payment information.</p>
+                
+                <div style="background: rgba(108, 92, 231, 0.05); padding: 16px; border-radius: 16px; margin-top: 12px;">
+                    <h3>Tip Options</h3>
+                    <div>
+                        <span class="badge">☕️ Coffee</span>
+                        <span class="badge">🧋 Milk Tea</span>
+                        <span class="badge">🍜 Rice Noodles</span>
+                        <span class="badge">🥙 Chinese Burger</span>
+                        <span class="badge">🍔 Hamburger</span>
+                    </div>
+                    <p style="font-size: 14px; margin-top: 12px; color: #718096;">Tipping is pure support and doesn't unlock any features.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🔗 Third-Party Services</h2>
+                <p>This app does not use any third-party analytics tools or advertising services.</p>
+            </div>
+
+            <div class="section">
+                <h2>👶 Children's Privacy</h2>
+                <p>This app does not knowingly collect personal information from children under 13.</p>
+            </div>
+
+            <div class="section">
+                <h2>📝 Changes to This Privacy Policy</h2>
+                <p>We may update this Privacy Policy from time to time. Changes will be posted on this page.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="contact-info">
+                <div>📧 <a href="mailto:your-email@example.com">your-email@example.com</a></div>
+                <div>🐦 <a href="#" target="_blank">@zhiqu_app</a></div>
+                <div style="font-size: 12px; color: #a0aec0; margin-top: 16px;">
+                    © 2025 智趣 (ZhiQu). All rights reserved.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchLanguage(lang) {
+            // 隐藏所有内容
+            document.getElementById('content-zh').classList.remove('active');
+            document.getElementById('content-en').classList.remove('active');
+            
+            // 显示选中的语言
+            document.getElementById('content-' + lang).classList.add('active');
+            
+            // 更新按钮状态
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 根据语言激活对应按钮
+            if (lang === 'zh') {
+                document.querySelectorAll('.lang-btn')[0].classList.add('active');
+                document.title = '智趣 - 隐私政策';
+            } else {
+                document.querySelectorAll('.lang-btn')[1].classList.add('active');
+                document.title = 'ZhiQu - Privacy Policy';
+            }
+        }
+
+        // 检测浏览器语言，自动选择
+        function detectLanguage() {
+            const userLang = navigator.language || navigator.userLanguage;
+            if (userLang.startsWith('zh')) {
+                switchLanguage('zh');
+            } else {
+                switchLanguage('en');
+            }
+        }
+
+        // 页面加载时检测语言
+        window.onload = detectLanguage;
+    </script>
+</body>
+</html>
